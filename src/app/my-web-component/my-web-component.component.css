@@ -1,0 +1,398 @@
+.cobrowse-code-popup {
+  background-color: #bdbdbd80;
+  border: 1px solid #d8d8d8;
+  border-radius: 5px;
+  bottom: 0;
+  box-shadow: 0 0 10px #0000001a;
+  display: none;
+  left: 0;
+  position: fixed;
+  right: 0;
+  top: 0;
+  z-index: 9999999
+}
+
+.popup-container {
+  background: #fff;
+  border-radius: .5em;
+  box-shadow: 0 10px 20px rgba(black, .2);
+  left: 50%;
+  max-width: 1200px;
+  overflow: hidden;
+  position: absolute;
+  text-align: left;
+  top: 50%;
+  transform: translate(-50%, -50%)
+}
+
+.cobrowse-popup-header {
+  align-items: center;
+  background: #163166;
+  color: #fff;
+  display: flex;
+  flex-flow: row;
+  font-size: 1.3rem;
+  justify-content: space-between;
+  margin: 0;
+  padding: 10px 15px
+}
+
+.x-btn {
+  height: 1rem;
+  position: relative;
+  width: 1rem;
+  background-color: transparent;
+  border: none;
+}
+
+.x-btn:after,
+.x-btn:before {
+  background-color: #fff;
+  content: " ";
+  height: 15px;
+  position: absolute;
+  width: 2px
+}
+
+.x-btn:before {
+  transform: translate(-50%, -50%) rotate(45deg)
+}
+
+.x-btn:after {
+  transform: translate(-50%, -50%) rotate(-45deg)
+}
+
+.cobrowse-popup-body {
+  /* align-items: center; */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 10px !important
+}
+
+.cobrowse-popup-body label {
+  font-size: 18px;
+  margin-bottom: 1%;
+}
+
+.cobrowse-popup-body p {
+  font-size: 1rem;
+}
+
+.cobrowse-popup-body button {
+  width: 20%;
+  background-color: #163166;
+  color: white;
+  font: 1em sans-serif;
+  margin-left: 40%;
+}
+
+.cobrowse-popup-info {
+  color: #676767;
+  font-size: .7rem;
+  line-height: 1.3rem;
+  margin-bottom: 0
+}
+
+.cobrowse-popup-code {
+  font-size: 1.6rem;
+  font-weight: 700;
+  letter-spacing: 6px;
+  margin: 0;
+  text-align: center
+}
+
+.maincontainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1rem;
+  text-align: center;
+  /* width: 50%; */
+  padding: 10px;
+  background-color: rgb(233, 233, 233);
+}
+
+.profileInfoSection {
+  width: 100%;
+  display: flex;
+  z-index: 0;
+  align-items: self-start;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.profileinfodiv {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-left: 15px;
+  column-gap: 25px;
+  font-size: larger;
+  font-weight: 600;
+}
+.profileinfodiv  span{
+  margin: 5px 0 5px;
+}
+
+.journerySentimentSection {
+  display: flex;
+  column-gap: 0.5rem;
+  z-index: 0;
+
+}
+
+.journerySentimentSection>div {
+  flex: 1;
+}
+
+.chatSummary {
+  text-align: start;
+  display: flex;
+  column-gap: 0.5rem;
+  padding: 5px;
+  width: 100%;
+  z-index: 0;
+
+}
+
+.chatdata {
+  overflow: scroll;
+  height: 150px;
+  margin: 20px 30px 20px;
+}
+
+.suggestedResTranslateSection {
+  display: flex;
+  column-gap: 0.5rem;
+  width: 100%;
+  z-index: 0;
+}
+
+.suggestedResTranslateSection>div {
+  flex: 1;
+}
+
+.knowledgeAtricalSection {
+  z-index: 0;
+  width: 100%;
+}
+
+.caseSendResponseSection {
+  display: flex;
+  column-gap: 0.5rem;
+  width: 100%;
+  z-index: 0;
+
+}
+
+.caseSendResponseSection>div {
+  flex: 1;
+}
+
+.caseSendResponseSection .sendResponse {
+  display: flex;
+  flex-direction: column;
+}
+
+.caseSendResponseSection .createCase {
+  gap: 1rem;
+}
+
+.emailsms {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.emailsms input {
+  padding: 10px;
+}
+
+.emailsms button {
+  align-items: center;
+  width: 60px;
+}
+
+.neo-tabs__item a {
+  padding: 5px 10px 5px 10px !important;
+  margin: 0px !important;
+  /* background-color: #ff2929; */
+  
+}
+.active {
+  background-color: #dad8d8;
+}
+
+.neo-tabs__item{
+  min-height: 42px;
+}
+.neo-tabs__nav {
+  align-items: flex-start !important;
+  min-height: 30px !important;
+}
+
+.neo-tabs__item a:before {
+  margin-right: 0px;
+}
+
+
+.sessionbtn {
+  display: flex;
+  border-radius: 5px;
+  column-gap: 1rem;
+  justify-content: space-evenly;
+  margin: 1rem 0;
+}
+
+.sessionbtnn {
+  display: flex;
+  gap: 1rem;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.sessionbtnnn {
+  display: flex;
+  gap: 1rem;
+  flex-direction: column;
+}
+
+.sentimentbuttons {
+  display: flex;
+  justify-content: space-around;
+}
+
+.sessionbtn button {
+  border: none;
+  width: 200px;
+  border-radius: 5px;
+  flex: 1;
+}
+
+
+
+.sessionbtn span {
+  color: white;
+}
+.sessiontabs{
+  font-size: larger;
+  font-weight: 600;
+  margin-bottom: 7px;
+  display: flex;
+  padding: 0 10px 0;
+  line-height: normal;
+}
+.journeybutton{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+.sessiontabdetails{
+  margin: 10px 5px 0;
+  line-height: 0;
+}
+.registertab{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+.registertab img{
+  object-fit: cover;
+}
+.casetabs{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
+.casetabdetails{
+  display: flex;
+  flex-direction: column;
+  column-gap: 10px;
+  margin: 10px 0px 0;
+}
+.summarytabs{
+  font-size: larger;
+  font-weight: 600;
+  margin-bottom: 7px;
+  padding: 0 10px 0;
+  line-height: normal;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+
+}
+.casebutton{
+  height: 50px;
+  width: 70%;
+  margin: 15px 10px 0;
+  font-size: larger;
+  font-weight: 600;
+  color: white;
+  border-radius: 10px;
+  background-color: #155E8B;
+}
+.register{
+  height: 40px;
+  width: 100%;
+  margin: 10px 10px 0;
+  font-size: larger;
+  font-weight: 600;
+  color: white;
+  border-radius: 10px;
+  background-color: #155E8B;
+}
+.asdfg {
+  font-size: larger;
+  font-weight: 600;
+  margin-bottom: 7px;
+  display: flex;
+}
+
+.inpp {
+  height: 25px;
+  width: 100%;
+}
+
+.inpp2 {
+  margin: 10px 10px;
+  height: 45px;
+  width: 600px;
+}
+
+.txt {
+  margin: 10px 10px;
+  height: 80px;
+  width: 600px;
+}
+.sessioninformation{
+  padding: 10px;
+
+}
+
+
+.senti {
+  width: 25%;
+}
+
+.senti h5 {
+  font-size: larger;
+  font-weight: 600;
+margin: 0 0 15px;
+}
+
+.spannnn {
+  background-color: #acc0d8;
+  padding: 2px;
+}
+
+.topiccc {
+  display: flex;
+  gap: 5px;
+  margin-left: 10px;
+}
+
+span {
+  font-family: 'Segoe UI Emoji', 'Noto Color Emoji', 'Apple Color Emoji', 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', 'sans-serif';
+}

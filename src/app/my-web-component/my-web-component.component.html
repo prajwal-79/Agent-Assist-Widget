@@ -1,0 +1,377 @@
+<div class="maincontainer">
+    <div aria-labelledby=":R0:" role="dialog" class="neo-sheet profileInfoSection" aria-label="Title">
+
+        <div class="neo-sheet__header">
+            <div class="neo-sheet__header--left" id=":R0:">
+                <figure class="neo-avatar " data-initials="MD" style="width: 100PX; height: 100PX;">
+                    <img class="neo-img"
+                        src="https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg?auto=compress&cs=tinysrgb&w=600"
+                        alt="Middle avatar" />
+                </figure>
+            </div>
+            <div class="neo-sheet__header--right profileinfodiv">
+                <span>USER DETAIL</span>
+                <span>User : Mrs.Alex</span>
+                <span>Email : alexsmith@xyz.com</span>
+                <span>Mobile : +1205606655</span>
+            </div>
+        </div>
+        <div class="senti">
+            <h5>SENTIMENT</h5>
+            <div class="sentimentbuttons">
+                <div>
+                    <button style='font-size:25px; border: none;' >🙂 </button><span
+                        style="display: flex;font-size: 12px;margin-top: 10px;">
+                        Curent : {{ (currentSentiment || 'NA') | uppercase}} </span>
+                </div>
+                <div>
+                    <button style='font-size:25px;border: none;' >😊</button><span
+                        style="display: flex;font-size: 12px;margin-top: 10px;">
+                        OverAll : {{ (overallSentiment || 'NA') | uppercase}} </span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="journerySentimentSection">
+        <div class="neo-sheet journey  sessioninformation">
+            <div class="journeytab">
+                <div class="neo-tabs ">
+                    <div class="neo-tabs__nav" role="tablist" aria-orientation="horizontal">
+
+                        <div class="neo-tabs__item" [ngClass]="{'active': isTab('sessioninfo')}">
+                            <h3 class="sessiontabs" (click)="setTab('sessioninfo')" role="tab">SESSION INFO</h3>
+                        </div>
+
+
+                        <div class="neo-tabs__item" [ngClass]="{'active': isTab('requestinitiate')}">
+                            <h3 class="sessiontabs" (click)="setTab('requestinitiate')" role="tab">
+                                AUTHENTICATE</h3>
+                        </div>
+
+                        <div class="neo-tabs__item" [ngClass]="{'active': isTab('register')}">
+                            <h3 class="sessiontabs" (click)="setTab('register')" role="tab">REGISTER</h3>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="sessiontabdetails">
+
+                    <div id="sessioninfo" *ngIf="isTab('sessioninfo')" class="registertab">
+
+                        <div>
+                            <img style="height: 80px;width: 80px;background-size: cover; margin: 10px 40px 5px;" [ngStyle]="{'background-image': isRegistered ? 
+                                     'url(\'../assets/registered.png\')' : 
+                                     'url(\'../assets/non-registered.png\')'}">
+                            <div><button class="register"> {{registered}}</button></div>
+
+                        </div>
+                        <div>
+                            <img style="height: 80px;width: 80px;background-size: cover;  margin:  10px 40px 5px;" [ngStyle]="{'background-image': isAuthenticated ? 
+                                    'url(\'../assets/authentication.png\')' : 
+                                'url(\'../assets/nonauthentication.png\')'}">
+                            <div> <button class="register">{{authenticated}}</button></div>
+                        </div>
+                    </div>
+
+                    <div id="requestinitiate" *ngIf="isTab('requestinitiate')">
+                        <div class="journeybutton">
+
+
+                            <button class="neo-btn neo-btn-primary neo-btn-primary--default" style="height: 40px;"
+                                (click)=" createSession()">Facial</button>
+                            <button class="neo-btn neo-btn-primary neo-btn-primary--default" style="height: 40px;"
+                                (click)="createSMSSession()">Device</button>
+                            <!-- <button class="neo-btn neo-btn-primary neo-btn-primary--default" style="height: 40px;"
+                                (click)="createAppSession()">App</button>
+                            <button class="neo-btn neo-btn-primary neo-btn-primary--default" style="height: 40px;"
+                                (click)="createVoiceSession()">Voice</button> -->
+                        </div>
+
+                    </div>
+                    <div id="register" *ngIf="isTab('register')">
+                        <h3>Request for Register To Journey</h3>
+                        <div class="journeybutton">
+                            <button class="neo-btn neo-btn-primary neo-btn-primary--default"
+                                style="height: 40px;">Facial</button>
+                            <button class="neo-btn neo-btn-primary neo-btn-primary--default"
+                                style="height: 40px;">Device</button>
+                            <!-- <button class="neo-btn neo-btn-primary neo-btn-primary--default"
+                                style="height: 40px;">App</button>
+                            <button class="neo-btn neo-btn-primary neo-btn-primary--default"
+                                style="height: 40px;">Voice</button> -->
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+    <div class="neo-sheet chatSummary">
+        <div>
+            <div class="neo-tabs ">
+                <div class="neo-tabs__nav summarytabs" role="tablist" aria-orientation="horizontal">
+                    <div class="neo-tabs__item" [ngClass]="{'active': isTabActive('botsummary')}">
+                        <h3 class="sessiontabs" (click)="setTabActive('botsummary')" role="tab">BOT CONVERSATION SUMMARY
+                        </h3>
+                    </div>
+                    <div class="neo-tabs__item" [ngClass]="{'active': isTabActive('conversation')}">
+                        <h3 class="sessiontabs" (click)="setTabActive('conversation')" role="tab">CONVERSATION SUMMARY
+                        </h3>
+                    </div>
+                </div>
+            </div>
+            <div class="summarytabdetails">
+                <div id="botsummary" class="summarytabdetails" *ngIf="isTabActive('botsummary')">
+                    <div class="chatdata">
+                       <h4> {{chatBotSummary}}</h4>
+                    </div>
+                </div>
+                <div id="conversation" class="summarytabdetails" *ngIf="isTabActive('conversation')">
+                    <div class="chatdata"><h4>
+                        {{chatSummary}}</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="sessionbtnn">
+            <button class="neo-btn neo-btn-secondary neo-btn-secondary--default"
+                style="margin-right: 5px; border: none;" (click)="Details()">
+                <span role="img" aria-label="info icon" class="neo-icon-clipboard neo-icon--large"
+                    style="color: black;"></span>Details
+            </button>
+            <button class="neo-btn neo-btn-secondary neo-btn-secondary--default" style="border: none;" (click)="help()">
+                <img src="assets/translation.png" alt=""
+                    style="height: 30px;width: 30px;background-size: cover;margin-right: 10px;">
+                Translate
+            </button>
+        </div>
+    </div>
+
+    <div class="suggestedResTranslateSection">
+        <div class="neo-sheet suggestedResponse">
+            <p class="asdfg">SUGGESTED RESPONSE</p>
+            <textarea rows="5" placeholder="Suggested Response" style="height: 150px;"></textarea>
+            <p class="asdfg" style="margin-top: 1%;">Action</p>
+            <select class="inpp">
+                <option value=""></option>
+                <option value="volvo">Shorter Message</option>
+                <option value="saab">Regenerate Message</option>
+                <option value="fiat">Translate Message</option>
+                <option value="audi">Add Sympathy</option>
+            </select>
+
+            <div class="sessionbtn">
+                <button style="margin-right: 5px;">
+                    <span role="img" aria-label="send icon" class="neo-icon-transfer-forward neo-icon--large"
+                        style="color: rgb(7, 166, 240); margin-right: 1%;"></span>Generate
+                </button>
+                <button>
+                    <span role="img" aria-label="send icon" class="neo-icon-send neo-icon--large"
+                        style="color: rgb(7, 166, 240);margin-right: 1%;"></span>Send Response</button>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="neo-sheet knowledgeAtricalSection ">
+        <p class="asdfg">KNOWLEDGE ARTICAL</p>
+        <p class="topiccc">Topics:
+            <span class="spannnn">Credit Card</span>
+            <span class="spannnn">Personal Loans</span>
+            <span class="spannnn">Payment Methods</span>
+        </p>
+        <div class="sessionbtn" style="display: flex;gap: 5px;margin-top: 5px;">
+            <button class="neo-btn neo-btn-primary neo-btn-primary--default">
+                Digital Cards
+            </button>
+            <button class="neo-btn neo-btn-primary neo-btn-primary--default">
+                Scam Alert
+            </button>
+            <button class="neo-btn neo-btn-primary neo-btn-primary--default">
+                Personal Loans
+            </button>
+        </div>
+    </div>
+
+    <div class="caseSendResponseSection">
+        <div class="neo-sheet">
+            <div class="neo-tabs ">
+                <div class="neo-tabs__nav casetabs" role="tablist" aria-orientation="horizontal">
+                    <div class="neo-tabs__item" [ngClass]="{'active': isActive('action')}">
+                        <h3 class="asdfg" (click)="setActive('action')" role="tab">ACTION</h3>
+                    </div>
+                    <div class="neo-tabs__item" [ngClass]="{'active': isActiveTab('transaction')}">
+                        <h3 class="asdfg" (click)="setActive('transaction')" role="tab">TRANSACTION</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="casetabdetails">
+                <div id="action" class="casetabdetails" *ngIf="isActive('action')">
+                    <div>
+                        <div><button class="casebutton" (click)="ceateCase()">Create Case</button></div>
+                        <div><button class="casebutton" (click)="findCase()">Find Case</button></div>
+                        <div> <button class="casebutton" (click)="createLead()">Create Lead</button></div>
+                    </div>
+                </div>
+                <div id="transaction" class="casetabdetails" *ngIf="isActive('transaction')">
+                    <div>
+                        <div><button class="casebutton">Digital
+                                Signature</button></div>
+                        <div><button class="casebutton">Credit
+                                Card Payment</button></div>
+                        <div><button class="casebutton">Outbound Notifiction</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="neo-sheet sendResponse ">
+            <p class="asdfg">SEND RESPONSE</p>
+            <div class="emailsms">
+                <div class="neo-tabs ">
+                    <div class="neo-tabs__nav" role="tablist" aria-orientation="horizontal">
+                        <div class="neo-tabs__item" [ngClass]="{'active' : isActiveTab('sms')}">
+                            <a (click)="setActiveTab('sms')" role="tab"><span class="neo-icon-sms neo-icon--large"
+                                    style="color: rgb(103, 171, 0);"> </span></a>
+                        </div>
+                        <div class="neo-tabs__item" [ngClass]="{'active' : isActiveTab('email')}">
+                            <a (click)="setActiveTab('email')" role="tab"><span class="neo-icon-email neo-icon--large"
+                                    style="color: rgba(233, 2, 2, 0.86);"></span></a>
+                        </div>
+
+                    </div>
+                </div>
+                <div id="email" *ngIf="isActiveTab('email')" class="emailsms">
+                    <input type="text" placeholder="Subject" />
+                    <textarea rows="5" placeholder="Suggested Response"></textarea>
+                    <button class="neo-btn neo-btn-primary neo-btn-primary--default">Send</button>
+                </div>
+
+                <div id="sms" *ngIf="isActiveTab('sms')" class="emailsms">
+                    <textarea rows="5" placeholder="Suggested Response"></textarea>
+                    <button class="neo-btn neo-btn-primary neo-btn-primary--default">Send</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="cobrowse-code-popup" id="myModal">
+        <div class="popup-container">
+            <div class="cobrowse-popup-header"><span>Translation</span><button class="x-btn" (click)="close()"></button>
+            </div>
+            <div class="cobrowse-popup-body">
+
+                <div class="neo-tabs ">
+                    <div class="neo-tabs__nav" role="tablist" aria-orientation="horizontal">
+                        <div class="neo-tabs__item" [ngClass]="{'active': isLangTab('English')}">
+                            <a (click)="setLangTab('English')" role="tab" >
+                                English
+                            </a>
+                        </div>
+                        <div class="neo-tabs__item" [ngClass]="{'active': isLangTab('Hindi')}">
+                            <a (click)="setLangTab('Hindi')" role="tab">
+                                Hindi
+                            </a>
+                        </div>
+
+
+                    </div>
+                </div>
+
+
+                <div id="Hindi" *ngIf="isLangTab('Hindi')">
+                    {{translatedHindi}}
+                </div>
+
+                <div id="English" *ngIf="isLangTab('English')">{{translatedEnglish}}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="cobrowse-code-popup" id="details">
+        <div class="popup-container">
+            <div class="cobrowse-popup-header"><span>Chat Detils</span><button class="x-btn" (click)="close()"></button>
+            </div>
+            <div class="cobrowse-popup-body">
+                <!-- <h4>{{chatDetails}}</h4> -->
+                <div *ngFor="let chat of chatDetails">
+                    <p><strong>{{ chat.speaker }}:</strong> {{ chat.message }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="cobrowse-code-popup" id="createCase">
+        <div class="popup-container">
+            <div class="cobrowse-popup-header"><span>Create a Case</span><button class="x-btn"
+                    (click)="close()"></button>
+            </div>
+            <div class="cobrowse-popup-body">
+                <form>
+                <label for="">Case Reason</label>
+                <select class="inpp2">
+                    <option value="blank"></option>
+                    <option value="volvo">Address Update </option>
+                    <option value="saab">Password Reset</option>
+                    <option value="fiat">Incorrect Transaction</option>
+                    <option value="audi">Account Statement</option>
+                    <option value="cc">Card Replacement</option>
+                    <option value="oo">Other</option>
+                </select>
+                <label for="">Subject</label>
+                <input class="inpp2">
+                <label for="">Description</label>
+                <textarea name="" id="" class="txt"></textarea>
+                <button style="padding: 10px 8px;" (click)="createCase()" type="button">CREATE</button>
+            </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="cobrowse-code-popup" id="findCase">
+        <div class="popup-container">
+            <div class="cobrowse-popup-header"><span>Find Case</span><button class="x-btn" (click)="close()"></button>
+            </div>
+            <div class="cobrowse-popup-body">
+                <p class="cobrowse-popup-info">Your Find Case Is Here</p>
+                <h3 class="cobrowse-popup-code"></h3>
+            </div>
+        </div>
+    </div>
+
+    <div class="cobrowse-code-popup" id="createLead">
+        <div class="popup-container">
+            <div class="cobrowse-popup-header"><span>Create Lead </span><button class="x-btn"
+                    (click)="close()"></button>
+            </div>
+            <div class="cobrowse-popup-body">
+                <label for="">Product Interest</label>
+                <select class="inpp2">
+                    <option value="blank"></option>
+                    <option value="volvo">Credit Card </option>
+                    <option value="saab">Home Loan </option>
+                    <option value="fiat">Car Loan </option>
+                    <option value="audi">Fixed Deposite</option>
+                    <option value="oo">Other</option>
+                </select>
+
+                <label for="">Description</label>
+                <textarea name="" id="" class="txt"></textarea>
+                <button style="padding: 10px 8px;">CREATE</button>
+            </div>
+        </div>
+    </div>
+
+
+
+
+</div>
