@@ -2,7 +2,6 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import twemoji from 'twemoji';
 import { DataService } from '../data.service';
-import { MyWebComponentService } from '../my-web-component.service';
 @Component({
   selector: 'app-my-web-component',
   templateUrl: './my-web-component.component.html',
@@ -10,6 +9,7 @@ import { MyWebComponentService } from '../my-web-component.service';
   encapsulation: ViewEncapsulation.Emulated,
 })
 export class MyWebComponentComponent implements OnInit {
+
   isRegistered = false;
   isAuthenticated = false;
   registered: string = 'Not-Registered';
@@ -19,8 +19,16 @@ export class MyWebComponentComponent implements OnInit {
   constructor(
     private dataService: DataService,
     private http: HttpClient,
-    private serviceNowService: MyWebComponentService
-  ) {}
+  ) {
+    // const api = (<any>window).WS.widgetAPI();
+    // // const api = (<any>window).WS.widgetAPI(interactionId);
+    // const interactionId = this.getAttribute('interactionid');
+    // console.log("interactionId =====>> "+interactionId);
+
+    // var clientDetails = api.getClientDetails();
+    // console.log("clientDetails =====>> "+clientDetails);
+
+  }
 
   langtab: string = 'English';
   setLangTab(tab: string): void {
@@ -61,12 +69,23 @@ export class MyWebComponentComponent implements OnInit {
   isActiveTab(tab: string): boolean {
     return this.activeTab === tab;
   }
-
+  incident = {
+    shortDescription: '',
+    priority: '',
+    assignmentGroup: '',
+    callerId: ''
+  };
+  number = {
+    shortDescription: '',
+    priority: '',
+    assignmentGroup: '',
+    callerId: '',
+    number: ''
+  };
   currentSentiment: string = '';
   overallSentiment: string = '';
   chatBotSummary: string = ' chat bot summay chat bot summary';
-  chatSummary: string =
-    'A customer contacts the chatbot with a question about their recent order. The chatbot requests the order number, retrieves the details, and informs the customer that the order is in transit and will arrive within 2-3 business days. The customer then asks about returning an item from a previous order to which the chatbot provides instructions to visit the websites Returns section for guidance. The chatbot offers further assistance if needed.';
+  chatSummary: string ='A customer contacts the chatbot with a question about their recent order. The chatbot requests the order number, retrieves the details, and informs the customer that the order is in transit and will arrive within 2-3 business days. The customer then asks about returning an item from a previous order to which the chatbot provides instructions to visit the websites Returns section for guidance. The chatbot offers further assistance if needed.';
 
   chatDetails: { speaker: string; message: string }[] = [
     {
@@ -187,6 +206,20 @@ export class MyWebComponentComponent implements OnInit {
   }
   createLead() {
     const modldiv = document.getElementById(`createLead`);
+    if (modldiv != null) {
+      modldiv.style.display = `block`;
+    }
+  }
+
+  createNewIncident() {
+    const modldiv = document.getElementById(`createNewIncident`);
+    if (modldiv != null) {
+      modldiv.style.display = `block`;
+    }
+  }
+
+  getIncidentDetails() {
+    const modldiv = document.getElementById(`getIncidentDetails`);
     if (modldiv != null) {
       modldiv.style.display = `block`;
     }
@@ -513,38 +546,63 @@ export class MyWebComponentComponent implements OnInit {
   //     console.error('WebSocket error:', error);
   //   };
   // }
-  caseReason: string = '';
-  subject: string = '';
-  description: string = '';
-  createCase() {
-    console.log('CREATE CASE CALLED');
+ 
 
-    // Call the getToken function to get the access token
-    this.serviceNowService.getToken().subscribe(
-      (response) => {
-        const token = response.access_token;
 
-        // Use the access token to create the incident
-        const incidentData = {
-          short_description: this.caseReason,
-          description: this.description,
-        };
+  // Ensure the import statements at the top of the file match the following
 
-        this.serviceNowService.createIncident(token, incidentData).subscribe(
-          (res) => {
-            console.log('Incident created successfully:', res);
-            // Handle success
-          },
-          (err) => {
-            console.error('Error creating incident:', err);
-            // Handle error
-          }
-        );
-      },
-      (err) => {
-        console.error('Error getting token:', err);
-        // Handle error
-      }
-    );
-  }
+
+// Add a constructor inside your component class as follows
+
+
+newShortDescription:string= '';
+newPriority:string= '';
+newAssignmentGroup:string= '';
+newCallerId:string= '';
+newNumber:string='';
+
+onSubmitIncident() {
+  this.dataService.createIncident(this.incident).subscribe(response => {
+    console.log('Incident created successfully:', response);
+    this.close();
+    this.newNumber=response.result.number;
+    this.newShortDescription=response.result.short_description;
+    this.newPriority=response.result.priority;
+    this.newAssignmentGroup=response.result.assignment_group;
+    this.newCallerId=response.result.caller_id;
+    
+  }, error => {
+    console.error('Error creating incident:', error);
+  });
+  this.createNewIncident();
+}
+
+
+shortDescription= '';
+priority= '';
+assignmentGroup= '';
+callerId= '';
+
+onSubmitGetIncident() {
+  this.dataService.getIncident(this.number.number).subscribe(response => {
+    console.log('Incident Fetched successfully:', response.result.number);
+    console.log('Incident Fetched successfully:', response.result.short_description);
+    console.log('Incident Fetched successfully:', response.result.priority);
+    console.log('Incident Fetched successfully:', response.result.assignment_group);
+    console.log('Incident Fetched successfully:', response.result.caller_id
+  );
+    console.log(response);
+    
+    this.close();
+    this.shortDescription=response.result.shortDescription;
+    this.priority=response.result.priority;
+    this.assignmentGroup=response.result.assignmentGroup;
+    this.callerId=response.result.callerId;
+  }, error => {
+    console.error('Error Fetching incident:', error);
+  });
+  
+  this.getIncidentDetails();
+}
+
 }

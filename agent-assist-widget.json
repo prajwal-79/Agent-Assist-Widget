@@ -1,0 +1,11 @@
+{
+  "name": "Agent assist copilot",
+  "description": "agent assist for copilot",
+  "tags": ["widget", "copilot", "agent assit"],
+  "version": "1.0.0",
+
+  "element": "<agent-assist-copilot></agent-assist-copilot>",
+  "icon": "neo-icon-sort",
+  "files": ["/elements/agent-assist.js", "/elements/style.css"],
+  "override_url": "https://copilot-agentassist.lab.bravishma.com/"
+}

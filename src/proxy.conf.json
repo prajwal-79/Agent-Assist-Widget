@@ -1,9 +1,0 @@
-{
-    "/api": {
-      "target": "https://dev224482.service-now.com",
-      "secure": true,
-      "changeOrigin": true,
-      "logLevel": "debug"
-    }
-  }
-  

@@ -60,17 +60,33 @@
                     <div id="sessioninfo" *ngIf="isTab('sessioninfo')" class="registertab">
 
                         <div>
-                            <img style="height: 80px;width: 80px;background-size: cover; margin: 10px 40px 5px;" [ngStyle]="{'background-image': isRegistered ? 
-                                     'url(\'../assets/registered.png\')' : 
-                                     'url(\'../assets/non-registered.png\')'}">
-                            <div><button class="register"> {{registered}}</button></div>
+                            <!-- <img style="height: 80px;width: 80px;background-size: cover; margin: 10px 40px 5px;" [ngStyle]="{'background-image': isRegistered ? 
+                                     'url(\'./assets/registered.png\')' : 
+                                     'url(\'./assets/non-registered.png\')'}"> -->
+
+                                     <div class="image-container" [ngClass]="{'registered': isRegistered, 'non-registered': !isRegistered}">
+                                        <img *ngIf="isRegistered" src="../assets/registered.png" alt="Registered" class="registertab">
+                                        <img *ngIf="!isRegistered" src="../assets/non-registered.png" alt="Non-Registered" class="registertab">
+                                      </div>
+
+
+                            <div>
+                                
+                                <button class="register"> {{registered}}</button></div>
 
                         </div>
                         <div>
-                            <img style="height: 80px;width: 80px;background-size: cover;  margin:  10px 40px 5px;" [ngStyle]="{'background-image': isAuthenticated ? 
+                            <!-- <img style="height: 80px;width: 80px;background-size: cover;  margin:  10px 40px 5px;" [ngStyle]="{'background-image': isAuthenticated ? 
                                     'url(\'../assets/authentication.png\')' : 
-                                'url(\'../assets/nonauthentication.png\')'}">
-                            <div> <button class="register">{{authenticated}}</button></div>
+                                'url(\'../assets/nonauthentication.png\')'}"> -->
+
+                                <div class="image-container" [ngClass]="{'authenticated': isAuthenticated, 'non-authenticated': !isAuthenticated}">
+                                    <img *ngIf="isAuthenticated" src="../assets/authentication.png" alt="Authenticated" class="auth-img">
+                                    <img *ngIf="!isAuthenticated" src="../assets/nonauthentication.png" alt="Non-Authenticated" class="auth-img">
+                                  </div>
+                            <div> 
+                                
+                                <button class="register">{{authenticated}}</button></div>
                         </div>
                     </div>
 
@@ -157,13 +173,21 @@
             <p class="asdfg">SUGGESTED RESPONSE</p>
             <textarea rows="5" placeholder="Suggested Response" style="height: 150px;"></textarea>
             <p class="asdfg" style="margin-top: 1%;">Action</p>
+           <div class="options">
+             <select class="inpp">
+                <option value=""></option>
+                <option value="shorter">Shorter Message</option>
+                <option value="regenerated">Regenerate Message</option>
+                <option value="sympathy">Add Sympathy</option>
+            </select>
             <select class="inpp">
                 <option value=""></option>
-                <option value="volvo">Shorter Message</option>
-                <option value="saab">Regenerate Message</option>
-                <option value="fiat">Translate Message</option>
-                <option value="audi">Add Sympathy</option>
+                <option value="lang1">Language 1</option>
+                <option value="lang2">Language 2</option>
+                <option value="lang3">Language 3</option>
+                <option value="lang4">Language 4</option>
             </select>
+           </div>
 
             <div class="sessionbtn">
                 <button style="margin-right: 5px;">
@@ -316,23 +340,33 @@
                     (click)="close()"></button>
             </div>
             <div class="cobrowse-popup-body">
-                <form>
-                <label for="">Case Reason</label>
-                <select class="inpp2">
-                    <option value="blank"></option>
-                    <option value="volvo">Address Update </option>
-                    <option value="saab">Password Reset</option>
-                    <option value="fiat">Incorrect Transaction</option>
-                    <option value="audi">Account Statement</option>
-                    <option value="cc">Card Replacement</option>
-                    <option value="oo">Other</option>
-                </select>
-                <label for="">Subject</label>
-                <input class="inpp2">
-                <label for="">Description</label>
-                <textarea name="" id="" class="txt"></textarea>
-                <button style="padding: 10px 8px;" (click)="createCase()" type="button">CREATE</button>
-            </form>
+                <form (ngSubmit)="onSubmitIncident()" #incidentForm="ngForm">
+                    <label for="shortDescription">Short Description</label>
+                    <input class="inpp2" name="shortDescription" [(ngModel)]="incident.shortDescription" required>
+                    
+                    <label for="priority">Priority</label>
+                    <select class="inpp2" name="priority" [(ngModel)]="incident.priority" required>
+                      <option value="1">1</option>
+                      <option value="2">2</option>
+                      <option value="3">3</option>
+                      <option value="4">4</option>
+                      <option value="5">5</option>
+                    </select>
+                    
+                    <label for="assignmentGroup">Assignment Group</label>
+                    <textarea name="assignmentGroup" class="txt" [(ngModel)]="incident.assignmentGroup" required></textarea>
+                    
+                    <label for="callerId">Caller ID</label>
+                    <input class="inpp2" name="callerId" [(ngModel)]="incident.callerId" required>
+                    
+                    <button style="padding: 10px 8px;" type="submit">CREATE</button>
+                  </form>
+                  <div class="cobrowse-popup-body"  id="createNewIncident">
+                    <span>Incident Created Successfully</span>
+                    <p> Your Case Number is:- {{newNumber}}</p>
+                </div>
+
+
             </div>
         </div>
     </div>
@@ -342,8 +376,21 @@
             <div class="cobrowse-popup-header"><span>Find Case</span><button class="x-btn" (click)="close()"></button>
             </div>
             <div class="cobrowse-popup-body">
-                <p class="cobrowse-popup-info">Your Find Case Is Here</p>
-                <h3 class="cobrowse-popup-code"></h3>
+                <form (ngSubmit)="onSubmitGetIncident()" #incidentForm="ngForm">
+
+                    <label for="number">Enter Your Incident Number :</label>
+                    <input class="inpp2" name="number" [(ngModel)]="number.number" required>
+                    
+                    <button style="padding: 10px 8px;" type="submit">Find</button>
+                  </form>
+
+                  <div class="cobrowse-popup-body"  id="getIncidentDetails">
+                    <span>Incident Details:-</span>
+                    <p>Short Description:{{shortDescription}}</p>
+                    <p>Priority:{{priority}}</p>
+                    <p>Assigned Group:{{assignmentGroup}}</p>
+                    <p>Caller ID:{{callerId}}</p>
+                </div>
             </div>
         </div>
     </div>
@@ -371,7 +418,7 @@
         </div>
     </div>
 
-
+  
 
 
 </div>

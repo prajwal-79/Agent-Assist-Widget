@@ -16,5 +16,17 @@ export class DataService {
   translateData(message: any): Observable<any> {
     return this.http.get<any>('https://rahul.lab.bravishma.com/translate-message?message=' + message +'&langs=en&langs=hi');
   }
+
+
+
+  createIncident(incident: any): Observable<any> {
+    return this.http.post<any>('http://localhost:8080/api/incidents', incident,);
+  }
+
+ getIncident(number: any): Observable<any> {
+    return this.http.get<any>('http://localhost:8080/api/'+number);
+  }
+
+
 }
 
